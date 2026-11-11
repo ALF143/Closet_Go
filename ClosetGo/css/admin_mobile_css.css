@@ -1,0 +1,2744 @@
+/*
+ * ============================================================
+ *  admin_mobile_css.css
+ *  Mobile & Tablet Responsive Styles — ClosetGoo Admin Panel
+ *
+ *  Include AFTER admin-modern.css in every admin page <head>.
+ *
+ *  Breakpoints:
+ *    Tablet  : max-width 1024px
+ *    Mobile  : max-width 768px
+ *    Small   : max-width 480px
+ * ============================================================
+ */
+
+/* ─── Desktop: hide mobile-only elements ─── */
+#mobileMenuToggle { display: none; }
+#sidebarOverlay   { display: none; }
+
+/* ─── Desktop: Ensure search-filter-row maintains horizontal layout ─── */
+.search-filter-section-top .search-filter-row {
+    display: flex !important;
+    gap: 10px !important;
+    align-items: center !important;
+}
+
+.search-filter-section-top .form-group {
+    margin: 0 !important;
+}
+
+/* ─── Desktop: Search input styling to match buy.php ─── */
+.search-filter-section-top input[type="text"] {
+    border: 1px solid #7c6300 !important;
+    border-radius: 8px !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+    box-shadow: inset 0 0 8px rgba(212, 175, 55, 0.4) !important;
+    transition: all 0.3s ease !important;
+    outline: none !important;
+    height: 40px !important;
+    box-sizing: border-box !important;
+}
+
+.search-filter-section-top input[type="text"]:hover,
+.search-filter-section-top input[type="text"]:focus {
+    background: #1a1a1a !important;
+    border-color: #d4af37 !important;
+    box-shadow: inset 0 0 12px rgba(212, 175, 55, 0.6) !important;
+    color: #ffffff !important;
+}
+
+.search-filter-section-top input[type="text"]::placeholder {
+    color: #888888 !important;
+}
+
+/* ─── Desktop: Ensure select and button have same height as search input ─── */
+.search-filter-section-top select {
+    height: 40px !important;
+    box-sizing: border-box !important;
+}
+
+.search-filter-section-top .add-new-product-btn {
+    height: 40px !important;
+    box-sizing: border-box !important;
+}
+
+/* ══════════════════════════════════════════════
+   TABLET  (max-width: 1024px)
+══════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+    body { word-break: break-word; }
+
+    .slide-panel { width: 75% !important; right: -85% !important; box-shadow: none !important; }
+    .slide-panel.slide-panel-open { right: 0 !important; box-shadow: -10px 0 35px rgba(0, 0, 0, 0.75), -2px 0 15px rgba(201, 170, 46, 0.2) !important; }
+
+    .admin-management-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+    /* Categories page — tablet: 4 columns, shrink card image */
+    .categories-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 8px !important; }
+    .categories-grid.slide-panel-open { grid-template-columns: repeat(2, 1fr) !important; }
+     .category-image-container { height: 130px !important; }
+    .category-info { padding: 10px !important; }
+    .category-info h3 { font-size: 0.85rem !important; margin-bottom: 6px !important; }
+    .category-actions { padding: 0 10px 10px 10px !important; gap: 6px !important; }
+    .btn-edit, .btn-delete { padding: 6px 8px !important; font-size: 0.78rem !important; }
+    .edit-modal-grid { grid-template-columns: 1fr !important; min-height: auto !important; }
+    .size-inputs { grid-template-columns: repeat(3, 1fr) !important; }
+}
+
+/* ── Mobile Page Title Bar: hidden by default on laptop / desktop ── */
+#mobilePageTitle {
+    display: none !important;
+}
+
+/* ══════════════════════════════════════════════
+   MOBILE  (max-width: 768px)
+══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    html, body { overflow-x: hidden; }
+
+    /* ── Hamburger toggle button ── */
+    #mobileMenuToggle {
+        display: flex !important;
+        position: fixed;
+        top: 14px;
+        left: 14px;
+        z-index: 1200;
+        width: 42px;
+        height: 42px;
+        background: #1a1a1a;
+        border: 1px solid rgba(212, 175, 55, 0.5);
+        border-radius: 10px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+        transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    #mobileMenuToggle i {
+        font-size: 18px;
+        color: #d4af37;
+        transition: transform 0.25s ease;
+    }
+    #mobileMenuToggle.active { background: #2a2a2a; border-color: #d4af37; }
+    #mobileMenuToggle.active i { transform: rotate(90deg); }
+
+    /* ── Overlay backdrop ── */
+    #sidebarOverlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        z-index: 999;
+        backdrop-filter: blur(2px);
+    }
+    #sidebarOverlay.show { display: block; }
+
+    /* ── Mobile Page Title Bar ── */
+    #mobilePageTitle {
+        display: flex !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 52px;
+        z-index: 1190;
+        pointer-events: none;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Poppins', 'Segoe UI', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #d4af37;
+        letter-spacing: 0.5px;
+        background: transparent;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+
+    /* Hide mobile page title when any slide panel or modal is open */
+    body.slide-panel-open #mobilePageTitle,
+    body.modal-open #mobilePageTitle,
+    body:has(.slide-panel.slide-panel-open) #mobilePageTitle,
+    body:has(#addNewProductModal.slide-panel-open) #mobilePageTitle,
+    body:has(#editModal.slide-panel-open) #mobilePageTitle {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* ── Sidebar — slide-in drawer ── */
+    .sidebar {
+        width: 230px !important;
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s ease !important;
+        z-index: 1100 !important;
+        align-items: flex-start !important;
+        padding: 20px 0 !important;
+    }
+    .sidebar:hover { width: 230px !important; }
+    .sidebar.mobile-open { transform: translateX(0) !important; }
+    .sidebar.mobile-open .sidebar-text,
+    .sidebar.mobile-open .logo-text { opacity: 1 !important; }
+    .sidebar.mobile-open .sidebar-icon,
+    .sidebar.mobile-open .logo-link {
+        width: 100% !important;
+        justify-content: flex-start !important;
+        padding: 0 18px !important;
+    }
+    .sidebar.mobile-open .dropdown-arrow { opacity: 0.7 !important; }
+    .sidebar:not(.mobile-open) .logo-text { opacity: 0 !important; }
+    .sidebar.mobile-open .dropdown-menu.show { max-height: 200px !important; opacity: 1 !important; }
+    .tooltip { display: none !important; }
+
+    /* ── Main shell: no left margin, strictly fit viewport ── */
+    .shell {
+        margin-left: 0 !important;
+        padding: 110px 10px 20px 10px !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+    .main-content {
+        margin-left: 0 !important;
+        padding: 0 16px 20px 16px !important;
+    }
+
+    /* ── Dashboard grid ── */
+    .shell.dashboard-shell {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+
+    /* Stats: 2 boxes per row */
+    .stats-overview {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        padding: 0 !important;
+        margin-top: 35px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    .stats-overview .stat-item:last-child {
+        grid-column: auto !important;
+        max-width: 100% !important;
+        justify-self: stretch !important;
+    }
+    .stat-item {
+        padding: 8px 10px !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        min-height: 70px !important;
+    }
+    .stat-header {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+    }
+    .stat-title {
+        font-size: 0.72rem !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+    .stat-content .stat-number { font-size: 1.1rem !important; }
+
+    /* Calendar / Order Stats: 2 boxes per row */
+    .cal-stats-overview {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        padding: 0 !important;
+        margin-top: 40px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+    .cal-stats-overview .cal-stat-item {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 8px 10px !important;
+        overflow: hidden !important;
+        min-height: 70px !important;
+    }
+    .cal-stats-overview .cal-stat-item:last-child {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        justify-self: stretch !important;
+    }
+    .cal-stat-header {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 2px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    .cal-stat-title {
+        font-size: 0.70rem !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        line-height: 1.25 !important;
+        color: #aaa !important;
+        width: 100% !important;
+    }
+    .cal-stat-change {
+        font-size: 0.62rem !important;
+        white-space: nowrap !important;
+    }
+    .cal-stat-number {
+        font-size: 1.15rem !important;
+        line-height: 1.15 !important;
+        margin: 2px 0 0 0 !important;
+    }
+    .cal-stat-duration .cal-stat-header {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+    .cal-stat-duration .cal-stat-title {
+        width: auto !important;
+    }
+    #rentalDurationDisplay {
+        font-size: 0.90rem !important;
+        flex-wrap: wrap !important;
+        gap: 2px 5px !important;
+        line-height: 1.3 !important;
+    }
+
+    /* Widgets: full width */
+    .revenue-chart-container,
+    .calendar-today-widget,
+    .customers-widget,
+    .status-widget,
+    .recent-widget,
+    .stock-widget,
+    .top-products-widget,
+    .category-widget,
+    .reviews-widget,
+    .staff-activity-widget {
+        grid-column: 1 / -1 !important;
+        height: auto !important;
+        min-height: auto !important;
+    }
+    .dashboard-widget { min-height: auto !important; }
+
+    /* Categories */
+    .categories-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    .categories-grid.slide-panel-open { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Categories page - move button to top with no margin */
+    .search-filter-section-top {
+        margin-top: 55px !important;
+        padding-top: 8px !important;
+    }
+    .add-new-product-btn {
+        margin-top: 0 !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* Slide panel */
+    .slide-panel {
+        width: 92% !important;
+        right: -92% !important;
+        border-radius: 16px 0 0 16px !important;
+    }
+    .slide-panel.slide-panel-open { right: 0 !important; }
+    .content-section.slide-panel-open {
+        width: 100% !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+    }
+
+    /* Tables — horizontal scroll */
+    .table-responsive, table {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        display: block;
+    }
+    .calendar-table-wrapper,
+    .reservations-table-wrapper,
+    .buy-orders-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .modal-body table { min-width: 460px; display: block; overflow-x: auto; }
+    .staff-logs-table th,
+    .staff-logs-table td { padding: 8px !important; font-size: 12px !important; }
+
+    /* Modals */
+    .modal-content {
+        width: 96% !important;
+        max-width: 96vw !important;
+        margin: 0 auto !important;
+        max-height: 92vh !important;
+    }
+
+    /* Admin form rows */
+    .admin-form-row, .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    .admin-management-grid { grid-template-columns: 1fr !important; }
+
+    /* Size / image inputs */
+    .size-inputs { grid-template-columns: repeat(2, 1fr) !important; }
+    .new-product-image-slots { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Content header */
+    .content-header {
+        flex-direction: column !important;
+        gap: 14px !important;
+        text-align: center !important;
+        padding: 18px !important;
+    }
+    .header-content h1 { font-size: 1.5rem !important; }
+
+    /* Typography */
+    h1 { font-size: 1.75rem !important; }
+    h2 { font-size: 1.35rem !important; }
+    h3 { font-size: 1.1rem !important; }
+
+    /* Buttons */
+    .form-actions, .admin-form-actions { flex-direction: column !important; gap: 10px !important; }
+    .btn-primary, .btn-secondary,
+    .admin-btn-primary, .admin-btn-secondary { width: 100% !important; }
+
+    /* Product grid */
+    .gowns-grid, .products-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+
+    /* Users */
+    .users-grid { grid-template-columns: 1fr !important; }
+    .user-card { flex-direction: column !important; text-align: center !important; }
+    .user-actions {
+        flex-direction: row !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        margin-top: 12px !important;
+    }
+
+    /* Status / metrics */
+    .status-breakdown { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+    .cust-metrics-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .cust-analytics-row { grid-template-columns: 1fr !important; }
+
+    /* Settings */
+    .settings-grid, .settings-row { grid-template-columns: 1fr !important; flex-direction: column !important; }
+
+    /* Range inputs */
+    .range-inputs { flex-wrap: wrap !important; }
+
+    /* Calendar */
+    .calendar-day { min-height: 60px !important; padding: 4px !important; }
+    .calendar-event { font-size: 10px !important; padding: 2px 4px !important; }
+
+    /* Order cards */
+    .order-card, .buy-card { flex-direction: column !important; gap: 10px !important; }
+
+    /* AI products */
+    .ai-grid, .ai-products-grid { grid-template-columns: 1fr !important; }
+
+    /* Add clothing */
+    .add-clothing-grid { grid-template-columns: 1fr !important; }
+
+    /* Misc flex rows */
+    .reservation-detail-row,
+    .order-detail-row { flex-direction: column !important; gap: 6px !important; }
+    .search-bar, .filter-bar { flex-direction: column !important; gap: 8px !important; }
+    .search-bar input,
+    .filter-bar input,
+    .filter-bar select { width: 100% !important; }
+    .action-buttons-group, .btn-group { flex-wrap: wrap !important; gap: 6px !important; }
+    .admin-alert { flex-direction: column !important; gap: 8px !important; }
+
+    /* ══════════════════════════════════════════════
+       ADD_ADMIN.PHP — Mobile Responsive Styles
+       ═════════════════════════════════════════════ */
+    
+    /* Admin Management Grid - Stack panels vertically with smaller gap */
+    .admin-management-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* Admin Card Panel - More compact */
+    .admin-card-panel {
+        padding: 12px !important;
+        border-radius: 10px !important;
+        background: #1a1a1a !important;
+        border: 1px solid #2a2a2a !important;
+    }
+
+    /* Admin Panel Header - Smaller and more compact */
+    .admin-panel-header {
+        padding: 10px 12px !important;
+        margin-bottom: 12px !important;
+        border-bottom: 1px solid #2a2a2a !important;
+    }
+    .admin-panel-title {
+        font-size: 1rem !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 6px !important;
+        margin: 0 !important;
+    }
+    .admin-panel-title i {
+        font-size: 0.9rem !important;
+        color: #ffd700 !important;
+    }
+
+    /* Account Type Selector - Compact horizontal buttons */
+    .account-type-selector {
+        flex-direction: row !important;
+        gap: 6px !important;
+        margin-bottom: 12px !important;
+    }
+    .account-type-btn {
+        flex: 1 !important;
+        padding: 8px 10px !important;
+        font-size: 0.75rem !important;
+        gap: 4px !important;
+        border-radius: 6px !important;
+        font-weight: 600 !important;
+    }
+    .account-type-btn i {
+        font-size: 0.8rem !important;
+    }
+    .account-type-btn.active {
+        background: linear-gradient(135deg, #7c6300, #ffd700) !important;
+        color: #0a0a0a !important;
+        border-color: #ffd700 !important;
+    }
+
+    /* Floating Input Groups - More compact */
+    .floating-group {
+        margin-bottom: 10px !important;
+        position: relative !important;
+    }
+    .floating-input {
+        padding: 10px 12px !important;
+        font-size: 13px !important;
+        border-radius: 6px !important;
+        border: 1px solid #333 !important;
+        background: #1a1a1a !important;
+    }
+    .floating-input:focus {
+        border-color: #ffd700 !important;
+        box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1) !important;
+    }
+    .floating-label {
+        font-size: 0.7rem !important;
+        padding: 0 4px !important;
+        background: #1a1a1a !important;
+        color: #888 !important;
+    }
+    .floating-input:focus + .floating-label,
+    .floating-input:not(:placeholder-shown) + .floating-label {
+        color: #ffd700 !important;
+    }
+
+    /* Password Toggle Button - Smaller and positioned */
+    .password-toggle-btn {
+        right: 8px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 0.8rem !important;
+        background: transparent !important;
+        border: none !important;
+        color: #888 !important;
+    }
+    .password-toggle-btn:hover {
+        color: #ffd700 !important;
+    }
+
+    /* Generate Password Button - Compact */
+    .admin-generate-btn {
+        width: 100% !important;
+        padding: 8px 12px !important;
+        font-size: 0.75rem !important;
+        margin-bottom: 12px !important;
+        gap: 4px !important;
+        border-radius: 6px !important;
+        background: #2a2a2a !important;
+        border: 1px solid #444 !important;
+        color: #ccc !important;
+    }
+    .admin-generate-btn:hover {
+        background: #333 !important;
+        border-color: #555 !important;
+        color: #fff !important;
+    }
+
+    /* Admin Button Group - Compact stacked buttons */
+    .admin-btn-group {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    .admin-btn-primary,
+    .admin-btn-secondary {
+        width: 100% !important;
+        padding: 10px 14px !important;
+        font-size: 0.8rem !important;
+        gap: 6px !important;
+        border-radius: 6px !important;
+        font-weight: 600 !important;
+    }
+    .admin-btn-primary {
+        background: linear-gradient(135deg, #7c6300, #ffd700) !important;
+        color: #0a0a0a !important;
+        border: none !important;
+    }
+    .admin-btn-secondary {
+        background: #2a2a2a !important;
+        color: #ccc !important;
+        border: 1px solid #444 !important;
+    }
+
+    /* Directory Filter Tabs - Compact and responsive */
+    .directory-filter-tabs {
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        margin-top: 8px !important;
+    }
+    .filter-tab-btn {
+        padding: 5px 8px !important;
+        font-size: 0.7rem !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+        border-radius: 4px !important;
+        background: #2a2a2a !important;
+        border: 1px solid #444 !important;
+        color: #888 !important;
+    }
+    .filter-tab-btn.active {
+        background: rgba(255, 215, 0, 0.15) !important;
+        border-color: #ffd700 !important;
+        color: #ffd700 !important;
+    }
+
+    /* Admin User Cards - Ultra compact */
+    .admin-user-card {
+        flex-direction: column !important;
+        gap: 8px !important;
+        padding: 10px !important;
+        background: #1f1f1f !important;
+        border: 1px solid #2a2a2a !important;
+        border-radius: 8px !important;
+    }
+    .admin-user-info-wrap {
+        flex-direction: row !important;
+        gap: 8px !important;
+        align-items: center !important;
+    }
+    .admin-avatar-circle {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.75rem !important;
+        flex-shrink: 0 !important;
+        background: linear-gradient(135deg, #7c6300, #ffd700) !important;
+        color: #0a0a0a !important;
+        font-weight: 700 !important;
+    }
+    .admin-avatar-circle.staff-avatar {
+        background: linear-gradient(135deg, #0066cc, #0099ff) !important;
+    }
+    .admin-details {
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
+    .admin-details h4 {
+        font-size: 0.85rem !important;
+        margin-bottom: 2px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        color: #fff !important;
+        font-weight: 600 !important;
+    }
+    .admin-details p {
+        font-size: 0.7rem !important;
+        margin: 1px 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        color: #888 !important;
+    }
+    .admin-details p i {
+        font-size: 0.65rem !important;
+        margin-right: 4px !important;
+    }
+    .admin-actions {
+        width: 100% !important;
+        justify-content: flex-end !important;
+    }
+    .admin-action-btn-danger {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.75rem !important;
+        border-radius: 6px !important;
+        background: rgba(255, 68, 68, 0.15) !important;
+        border: 1px solid rgba(255, 68, 68, 0.3) !important;
+        color: #ff5252 !important;
+    }
+    .admin-action-btn-danger:hover {
+        background: rgba(255, 68, 68, 0.25) !important;
+        border-color: rgba(255, 68, 68, 0.5) !important;
+    }
+
+    /* Admin Badges - Ultra compact */
+    .admin-badge-current,
+    .admin-badge-active,
+    .admin-badge-role-staff {
+        font-size: 0.6rem !important;
+        padding: 2px 5px !important;
+        margin-left: 4px !important;
+        border-radius: 3px !important;
+        font-weight: 600 !important;
+    }
+    .admin-badge-current {
+        background: rgba(34, 197, 94, 0.2) !important;
+        color: #4ade80 !important;
+        border: 1px solid rgba(34, 197, 94, 0.4) !important;
+    }
+    .admin-badge-active {
+        background: rgba(255, 215, 0, 0.15) !important;
+        color: #ffd700 !important;
+        border: 1px solid rgba(255, 215, 0, 0.3) !important;
+    }
+    .admin-badge-role-staff {
+        background: rgba(0, 102, 204, 0.15) !important;
+        color: #4da6ff !important;
+        border: 1px solid rgba(0, 102, 204, 0.3) !important;
+    }
+
+    /* Empty State - Compact */
+    .admin-empty-state {
+        padding: 20px 16px !important;
+        text-align: center !important;
+    }
+    .admin-empty-state i {
+        font-size: 1.5rem !important;
+        margin-bottom: 8px !important;
+        color: #555 !important;
+    }
+    .admin-empty-state p {
+        font-size: 0.8rem !important;
+        color: #888 !important;
+        margin: 0 !important;
+    }
+
+    /* Notification Toast - Ultra compact */
+    .clear-chat-confirm-modal {
+        top: 10px !important;
+        right: 10px !important;
+        left: auto !important;
+        transform: none !important;
+        width: auto !important;
+        max-width: 280px !important;
+    }
+    .clear-chat-confirm-modal.show {
+        transform: none !important;
+    }
+    .clear-chat-confirm-card {
+        padding: 10px 12px !important;
+        border-radius: 8px !important;
+        gap: 8px !important;
+    }
+    .clear-chat-confirm-icon {
+        width: 26px !important;
+        height: 26px !important;
+        font-size: 0.75rem !important;
+    }
+    .clear-chat-confirm-title {
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
+    }
+    .clear-chat-confirm-desc {
+        font-size: 0.7rem !important;
+        line-height: 1.3 !important;
+    }
+    .clear-chat-btn-cancel,
+    .clear-chat-btn-delete {
+        padding: 4px 8px !important;
+        font-size: 0.7rem !important;
+        border-radius: 4px !important;
+    }
+    .clear-chat-confirm-actions {
+        gap: 6px !important;
+    }
+
+    /* ══════════════════════════════════════════════
+       SETTINGS.PHP — Mobile Responsive Styles
+       ═════════════════════════════════════════════ */
+    
+    /* Settings Wrapper */
+    .settings-wrapper {
+        padding: 10px 0 30px !important;
+    }
+
+    /* Settings Header */
+    .settings-header {
+        padding: 14px 16px !important;
+        margin-bottom: 20px !important;
+    }
+    .settings-header h1 {
+        font-size: 1.3rem !important;
+        gap: 8px !important;
+    }
+    .settings-subtitle {
+        font-size: 0.8rem !important;
+        margin-top: 4px !important;
+    }
+
+    /* Banner Management Card */
+    .banner-management-card {
+        margin-bottom: 20px !important;
+    }
+    .banner-card-header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        padding: 14px 16px !important;
+    }
+    .banner-header-left {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+    .banner-header-left .custom-card-icon {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1.1rem !important;
+        flex-shrink: 0 !important;
+    }
+    .banner-header-left .custom-card-title {
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
+    .banner-header-left .custom-card-title h3 {
+        font-size: 0.95rem !important;
+    }
+    .banner-header-left .custom-card-title p {
+        font-size: 0.75rem !important;
+    }
+    .btn-gold-add {
+        width: 100% !important;
+        padding: 11px 14px !important;
+        font-size: 0.85rem !important;
+        justify-content: center !important;
+    }
+
+    /* Banner Desktop Table hidden on mobile; Mobile Cards displayed */
+    .banner-desktop-table {
+        display: none !important;
+    }
+    .banner-mobile-cards {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 14px !important;
+        padding: 14px 12px !important;
+    }
+    .banner-table-container {
+        overflow-x: visible !important;
+    }
+
+    /* Settings Grid Cards */
+    .settings-grid-cards {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    /* Custom Settings Card */
+    .custom-settings-card {
+        border-radius: 12px !important;
+    }
+    .custom-card-header {
+        padding: 14px 16px !important;
+        gap: 10px !important;
+    }
+    .custom-card-icon {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 1rem !important;
+    }
+    .custom-card-title h3 {
+        font-size: 0.95rem !important;
+    }
+    .custom-card-title p {
+        font-size: 0.75rem !important;
+    }
+    .custom-card-body {
+        padding: 16px !important;
+    }
+
+    /* Form Section Divider */
+    .form-section-divider {
+        font-size: 0.7rem !important;
+        margin: 10px 0 8px !important;
+    }
+
+    /* Form Group Custom */
+    .form-group-custom {
+        margin-bottom: 12px !important;
+    }
+    .form-group-custom label {
+        font-size: 0.8rem !important;
+        margin-bottom: 5px !important;
+    }
+    .form-input-custom,
+    .form-textarea-custom {
+        padding: 10px 12px !important;
+        font-size: 0.85rem !important;
+    }
+    .form-textarea-custom {
+        min-height: 60px !important;
+    }
+
+    /* Custom File Input */
+    .custom-file-input {
+        padding: 8px 10px !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* Gold Save Button */
+    .btn-gold-save {
+        padding: 10px 14px !important;
+        font-size: 0.85rem !important;
+        margin-top: 12px !important;
+    }
+
+    /* QR Preview Box */
+    .qr-preview-box {
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 10px !important;
+    }
+    .qr-thumb-frame {
+        width: 70px !important;
+        height: 70px !important;
+    }
+    .qr-info-title {
+        font-size: 0.8rem !important;
+    }
+    .qr-info-path {
+        font-size: 0.7rem !important;
+    }
+    .qr-info-status {
+        font-size: 0.7rem !important;
+    }
+
+    /* Alert Banner */
+    .alert-banner {
+        padding: 10px 14px !important;
+        font-size: 0.85rem !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+    }
+
+    /* Modal Styles */
+    .custom-modal-overlay {
+        padding: 10px !important;
+    }
+    .custom-modal-box {
+        max-width: 100% !important;
+        border-radius: 12px !important;
+    }
+    .custom-modal-header {
+        padding: 14px 16px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+    }
+    .custom-modal-header h3 {
+        font-size: 1rem !important;
+    }
+    .modal-close-btn {
+        position: absolute !important;
+        top: 14px !important;
+        right: 14px !important;
+    }
+    .custom-modal-body {
+        padding: 16px !important;
+    }
+    .custom-modal-footer {
+        padding: 12px 16px !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    .btn-modal-cancel,
+    .btn-gold-add {
+        width: 100% !important;
+        padding: 10px 14px !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Banner Live Preview */
+    .banner-live-preview {
+        height: 100px !important;
+    }
+    .preview-placeholder {
+        font-size: 0.8rem !important;
+    }
+    .preview-placeholder i {
+        font-size: 1.5rem !important;
+    }
+
+    /* ══════════════════════════════════════════════
+       AI_PRODUCTS.PHP — Mobile Responsive Styles
+       ═════════════════════════════════════════════ */
+    
+    /* Main Container */
+    .main-container {
+        padding: 16px !important;
+    }
+
+    /* Page Header */
+    .page-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+        margin-bottom: 16px !important;
+    }
+    .page-header .page-icon {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 1rem !important;
+    }
+    .page-header h2 {
+        font-size: 1.2rem !important;
+    }
+    .page-header .page-sub {
+        font-size: 0.8rem !important;
+    }
+
+    /* Cards */
+    .card {
+        border-radius: 12px !important;
+    }
+    .card-header {
+        padding: 14px 16px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+    }
+    .card-header h3 {
+        font-size: 0.95rem !important;
+    }
+    .badge {
+        font-size: 0.7rem !important;
+        padding: 3px 8px !important;
+    }
+
+    /* Card Body */
+    .card-body {
+        padding: 16px !important;
+    }
+    .card-body label {
+        font-size: 0.8rem !important;
+        margin-bottom: 5px !important;
+    }
+    .card-body input,
+    .card-body textarea {
+        padding: 10px 12px !important;
+        font-size: 0.85rem !important;
+    }
+    .card-body textarea {
+        min-height: 70px !important;
+    }
+
+    /* Form Row */
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* Form Section */
+    .form-section {
+        padding: 14px !important;
+        margin-bottom: 14px !important;
+    }
+    .form-section h4 {
+        font-size: 0.85rem !important;
+        margin-bottom: 12px !important;
+    }
+    .form-section input[readonly] {
+        padding: 10px 12px !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Form Actions */
+    .form-actions {
+        padding-top: 12px !important;
+    }
+    .btn-primary {
+        width: 100% !important;
+        padding: 10px 14px !important;
+        font-size: 0.85rem !important;
+        justify-content: center !important;
+    }
+
+    /* Alert */
+    .alert {
+        padding: 12px 14px !important;
+        font-size: 0.85rem !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+    }
+    .alert i {
+        font-size: 1rem !important;
+    }
+
+    /* Slide Panel */
+    .slide-panel {
+        width: 92% !important;
+        right: -92% !important;
+        border-radius: 12px 0 0 12px !important;
+    }
+    .slide-panel.open {
+        right: 0 !important;
+    }
+    .slide-panel-header {
+        padding: 14px 16px !important;
+    }
+    .slide-panel-header h3 {
+        font-size: 1rem !important;
+    }
+    .slide-panel-close {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 0.9rem !important;
+    }
+    .slide-panel-body {
+        padding: 16px !important;
+    }
+    .slide-panel-footer {
+        padding: 12px 16px !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    .slide-panel-footer input {
+        width: 100% !important;
+        padding: 10px 12px !important;
+        font-size: 0.85rem !important;
+    }
+    .slide-panel-footer button {
+        width: 100% !important;
+        padding: 10px 14px !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Color Items */
+    .color-item {
+        padding: 10px 12px !important;
+        margin-bottom: 6px !important;
+        border-radius: 8px !important;
+    }
+    .color-item > div {
+        font-size: 0.85rem !important;
+    }
+    .color-item i {
+        font-size: 0.7rem !important;
+    }
+    .color-item .remove-color {
+        font-size: 0.7rem !important;
+        padding: 3px 8px !important;
+    }
+
+    /* Confirmation Modal */
+    .confirmation-modal-content {
+        padding: 24px 20px !important;
+        max-width: 90% !important;
+        border-radius: 12px !important;
+    }
+    .confirmation-modal-content .modal-icon {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 1.2rem !important;
+        margin-bottom: 12px !important;
+    }
+    .confirmation-modal-content h3 {
+        font-size: 1rem !important;
+    }
+    .confirmation-modal-content p {
+        font-size: 0.85rem !important;
+        margin-bottom: 16px !important;
+    }
+    .confirmation-modal-buttons {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    .confirmation-modal-buttons button {
+        width: 100% !important;
+        padding: 10px 14px !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* ══════════════════════════════════════════════
+       DASHBOARD.PHP — Customer Statistics Mobile Styles
+       ═════════════════════════════════════════════ */
+    
+    /* Customers Widget */
+    .customers-widget {
+        border-radius: 12px !important;
+    }
+
+    /* Customer Widget Header */
+    .cust-widget-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+        padding: 14px 16px !important;
+    }
+    .cust-header-title h3 {
+        font-size: 1rem !important;
+        gap: 6px !important;
+    }
+    .cust-header-subtitle {
+        display: none !important;
+    }
+    .cust-header-badge-wrapper {
+        display: none !important;
+    }
+    .cust-today-badge {
+        width: 100% !important;
+        padding: 8px 12px !important;
+        font-size: 0.8rem !important;
+        justify-content: center !important;
+        gap: 6px !important;
+    }
+
+    /* Customer Metrics Grid */
+    .cust-metrics-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+        padding: 0 16px !important;
+    }
+    .cust-metric-card {
+        padding: 12px !important;
+        border-radius: 10px !important;
+        gap: 8px !important;
+    }
+    /* Hide Past 7 Days and This Month cards on mobile, keep only New Customers Today and Total Customers */
+    .cust-metrics-grid .cust-metric-card:nth-child(2),
+    .cust-metrics-grid .cust-metric-card:nth-child(3) {
+        display: none !important;
+    }
+    /* Make the remaining cards fill their containers properly */
+    .cust-metrics-grid .cust-metric-card:nth-child(1),
+    .cust-metrics-grid .cust-metric-card:nth-child(4) {
+        grid-column: span 1 !important;
+    }
+    /* Hide the metric-compare elements on mobile */
+    .cust-metric-compare {
+        display: none !important;
+    }
+
+    /* Customer Details Slide Panel Mobile Styles */
+    #customerDetailsModal.slide-panel {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        right: -120% !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border-left: none !important;
+    }
+    #customerDetailsModal.slide-panel.slide-panel-open {
+        right: 0 !important;
+        box-shadow: -10px 0 35px rgba(0, 0, 0, 0.75), -2px 0 15px rgba(201, 170, 46, 0.2) !important;
+        border-left: 2px solid rgba(201, 170, 46, 0.6) !important;
+    }
+    #customerDetailsModal .slide-panel-header {
+        padding: 10px 14px !important;
+    }
+    #customerDetailsModal .slide-panel-header h3 {
+        font-size: 0.90rem !important;
+        font-weight: 600 !important;
+        line-height: 1.3 !important;
+        color: #ffd700 !important;
+        word-break: break-word !important;
+    }
+    #customerDetailsModal .slide-panel-header .close-panel-btn {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 13px !important;
+    }
+    #customerDetailsModal .slide-panel-body {
+        padding: 12px 10px !important;
+    }
+    #customerDetailsModal .cust-modal-search-wrap {
+        padding: 10px 14px !important;
+        gap: 8px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+    }
+    #customerDetailsModal .cust-modal-search-box {
+        min-width: 0 !important;
+        flex: 1 !important;
+        height: 36px !important;
+        border-radius: 3px !important;
+        padding: 0 12px !important;
+    }
+    #customerDetailsModal .cust-modal-search-box i {
+        display: none !important;
+    }
+    #customerDetailsModal .cust-modal-search-box input {
+        font-size: 0.85rem !important;
+        padding: 0 !important;
+    }
+    #customerDetailsModal .cust-modal-count-badge {
+        font-size: 0.75rem !important;
+        padding: 8px 10px !important;
+        height: 36px !important;
+        white-space: nowrap !important;
+        border-radius: 3px !important;
+    }
+    .cust-metric-icon {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.9rem !important;
+    }
+    .cust-metric-details {
+        flex: 1 !important;
+    }
+    .cust-metric-label {
+        font-size: 0.7rem !important;
+    }
+    .cust-metric-value-row {
+        gap: 6px !important;
+        margin-top: 4px !important;
+    }
+    .cust-metric-value {
+        font-size: 1.1rem !important;
+    }
+    .cust-metric-pill {
+        font-size: 0.65rem !important;
+        padding: 2px 6px !important;
+    }
+
+    /* Customer Trend Section - Hide on mobile */
+    .cust-trend-section {
+        display: none !important;
+    }
+
+    /* Customer Bars Container */
+    .cust-bars-container {
+        gap: 8px !important;
+    }
+    .cust-bar-item {
+        flex: 1 !important;
+        min-width: 0 !important;
+        padding: 8px !important;
+        border-radius: 8px !important;
+    }
+    .cust-bar-count {
+        font-size: 0.9rem !important;
+        margin-bottom: 4px !important;
+    }
+    .cust-bar-track {
+        height: 80px !important;
+    }
+    .cust-bar-fill {
+        min-height: 12px !important;
+    }
+    .cust-bar-day {
+        font-size: 0.75rem !important;
+        margin-top: 4px !important;
+    }
+    .cust-bar-date {
+        font-size: 0.65rem !important;
+    }
+
+    /* Customer Modal */
+    .cust-modal {
+        z-index: 10000 !important;
+    }
+    .cust-modal-content {
+        width: 96% !important;
+        max-width: 96vw !important;
+        max-height: 90vh !important;
+        border-radius: 12px !important;
+        margin: 0 auto !important;
+    }
+    .cust-modal-header {
+        padding: 14px 16px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+    }
+    .cust-modal-title-wrap h3 {
+        font-size: 1rem !important;
+        gap: 6px !important;
+    }
+    .cust-modal-subtitle {
+        font-size: 0.75rem !important;
+    }
+    .cust-modal-search-wrap {
+        flex-direction: row !important;
+        gap: 8px !important;
+        padding: 12px 16px !important;
+        align-items: center !important;
+    }
+    .cust-modal-search-box {
+        width: 100% !important;
+        flex: 1 !important;
+        height: 36px !important;
+        border-radius: 3px !important;
+        padding: 0 12px !important;
+    }
+    .cust-modal-search-box i {
+        display: none !important;
+    }
+    .cust-modal-search-box input {
+        width: 100% !important;
+        padding: 0 !important;
+        font-size: 0.85rem !important;
+    }
+    .cust-modal-count-badge {
+        font-size: 0.8rem !important;
+        padding: 8px 10px !important;
+        height: 36px !important;
+        white-space: nowrap !important;
+        border-radius: 3px !important;
+    }
+    .cust-modal-body {
+        padding: 0 !important;
+        max-height: 60vh !important;
+    }
+    .cust-modal-loading,
+    .cust-modal-empty {
+        padding: 30px 20px !important;
+    }
+    .cust-modal-loading i,
+    .cust-modal-empty i {
+        font-size: 1.5rem !important;
+        margin-bottom: 8px !important;
+    }
+    .cust-modal-loading p,
+    .cust-modal-empty p {
+        font-size: 0.85rem !important;
+    }
+    .cust-modal-list {
+        padding: 0 16px 16px !important;
+    }
+
+    /* Customer Card Row */
+    .cust-card-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 12px !important;
+        border-radius: 3px !important;
+    }
+    .cust-row-card-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        width: 100% !important;
+        gap: 8px !important;
+        align-items: center !important;
+    }
+    .cust-row-card-actions .cust-btn-view-card {
+        flex: 1 !important;
+    }
+    .cust-row-card-actions span.cust-order-pill {
+        flex: 1 !important;
+        justify-content: center !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    .cust-row-identity {
+        flex-direction: row !important;
+        gap: 10px !important;
+        align-items: center !important;
+    }
+    .cust-card-avatar-wrap {
+        flex-shrink: 0 !important;
+    }
+    .cust-card-avatar {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 0.9rem !important;
+    }
+    .cust-identity-text {
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
+    .cust-name-line {
+        margin-bottom: 4px !important;
+    }
+    .cust-card-name {
+        font-size: 0.9rem !important;
+    }
+    .cust-joined-sub {
+        font-size: 0.7rem !important;
+        gap: 4px !important;
+    }
+    .cust-row-contacts {
+        flex-direction: column !important;
+        gap: 6px !important;
+    }
+    .cust-row-info-item {
+        font-size: 0.8rem !important;
+        gap: 6px !important;
+    }
+    .cust-row-location {
+        font-size: 0.8rem !important;
+    }
+    .cust-btn-view-card {
+        width: 100% !important;
+        padding: 8px 12px !important;
+        font-size: 0.8rem !important;
+        gap: 6px !important;
+        border-radius: 3px !important;
+    }
+    .cust-order-pill {
+        font-size: 0.75rem !important;
+        padding: 4px 8px !important;
+        border-radius: 3px !important;
+    }
+
+    /* Customer ID Lightbox Modal */
+    .cust-id-lightbox-modal {
+        z-index: 100005 !important;
+    }
+    .cust-id-lightbox-content {
+        width: 96% !important;
+        max-width: 96vw !important;
+        border-radius: 12px !important;
+        margin: 0 auto !important;
+    }
+
+    /* Reservation Details Modal Mobile Styles */
+    #reservationModal.slide-panel {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        right: -120% !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border-left: none !important;
+        margin-bottom: 20px !important;
+    }
+    #reservationModal.slide-panel.slide-panel-open {
+        right: 0 !important;
+        box-shadow: -10px 0 35px rgba(0, 0, 0, 0.75), -2px 0 15px rgba(201, 170, 46, 0.2) !important;
+        border-left: 2px solid rgba(201, 170, 46, 0.6) !important;
+    }
+    #reservationModal .slide-panel-header {
+        padding: 10px 14px !important;
+    }
+    #reservationModal .slide-panel-header h2 {
+        font-size: 0.90rem !important;
+        font-weight: 600 !important;
+        line-height: 1.3 !important;
+        color: #ffd700 !important;
+        word-break: break-word !important;
+    }
+    #reservationModal .slide-panel-header .close-panel-btn {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 13px !important;
+    }
+    #reservationModal .slide-panel-body {
+        padding: 12px 10px 20px 10px !important;
+        margin-bottom: 20px !important;
+    }
+    .res-detail-section {
+        margin-bottom: 12px !important;
+        padding: 10px !important;
+        border-radius: 3px !important;
+    }
+    .res-detail-section-title {
+        font-size: 0.8rem !important;
+        margin-bottom: 8px !important;
+        padding-bottom: 6px !important;
+    }
+    .res-detail-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+    .res-detail-field {
+        padding: 8px !important;
+        border-radius: 3px !important;
+    }
+    .res-detail-label {
+        font-size: 0.7rem !important;
+        margin-bottom: 4px !important;
+    }
+    .res-detail-value {
+        font-size: 0.85rem !important;
+    }
+    .res-detail-value.gold {
+        font-size: 1rem !important;
+    }
+
+    /* Upload ID Modal Mobile Styles */
+    #uploadIdModal.slide-panel {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        right: -120% !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border-left: none !important;
+    }
+    #uploadIdModal.slide-panel.slide-panel-open {
+        right: 0 !important;
+        box-shadow: -10px 0 35px rgba(0, 0, 0, 0.75), -2px 0 15px rgba(201, 170, 46, 0.2) !important;
+        border-left: 2px solid rgba(201, 170, 46, 0.6) !important;
+    }
+    #uploadIdModal .slide-panel-header {
+        padding: 10px 14px !important;
+    }
+    #uploadIdModal .slide-panel-header h2 {
+        font-size: 0.90rem !important;
+        font-weight: 600 !important;
+        line-height: 1.3 !important;
+        color: #ffd700 !important;
+        word-break: break-word !important;
+    }
+    #uploadIdModal .slide-panel-body {
+        padding: 12px 10px !important;
+    }
+    #uploadIdModal select {
+        padding: 10px 12px !important;
+        font-size: 0.85rem !important;
+    }
+    #uploadIdModal label {
+        font-size: 0.75rem !important;
+        margin-bottom: 6px !important;
+    }
+    #uploadIdModal button[type="submit"] {
+        width: 100% !important;
+        padding: 12px !important;
+        font-size: 0.85rem !important;
+    }
+    .cust-id-lightbox-header {
+        padding: 14px 16px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+    }
+    .cust-id-lightbox-header h3 {
+        font-size: 1rem !important;
+    }
+    .cust-id-lightbox-header span {
+        font-size: 0.75rem !important;
+    }
+    .close-panel-btn {
+        position: absolute !important;
+        top: 14px !important;
+        right: 14px !important;
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .cust-id-lightbox-body {
+        padding: 16px !important;
+    }
+    .cust-id-dual-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    .cust-id-side-card {
+        padding: 12px !important;
+    }
+    .cust-id-side-label {
+        font-size: 0.75rem !important;
+        margin-bottom: 8px !important;
+    }
+    .cust-id-img-box {
+        min-height: 180px !important;
+        max-height: 380px !important;
+    }
+    .cust-id-preview-img {
+        max-height: 360px !important;
+    }
+    .cust-id-empty-state {
+        padding: 30px 20px !important;
+    }
+    .cust-id-empty-state i {
+        font-size: 2rem !important;
+        margin-bottom: 10px !important;
+    }
+    .cust-id-empty-state p {
+        font-size: 0.85rem !important;
+    }
+
+    /* Admin Chat Panel */
+    #adminChatPanel {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    #adminChatUserList {
+        width: 100% !important;
+        border-right: none !important;
+        border-bottom: 1px solid #2a2a2a !important;
+        max-height: 40vh !important;
+    }
+    #adminChatUserListItems {
+        padding: 10px !important;
+    }
+    #adminChatSearch {
+        padding: 8px 12px !important;
+        font-size: 0.85rem !important;
+    }
+    #adminChatConvo {
+        padding: 12px !important;
+    }
+    #adminChatMessages {
+        padding: 12px !important;
+    }
+    #adminReplyInput {
+        padding: 10px 14px !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Admin Chat Icon */
+    #adminChatIconBtn {
+        width: 40px !important;
+        height: 40px !important;
+        top: 14px !important;
+        right: 14px !important;
+    }
+    #adminChatIconBtn img {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    #adminChatTotalBadge {
+        min-width: 16px !important;
+        height: 16px !important;
+        font-size: 9px !important;
+    }
+}
+
+/* ══════════════════════════════════════════════
+   SMALL PHONES  (max-width: 480px)
+══════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+    .shell { padding: 96px 10px 18px 10px !important; }
+
+
+    /* Stats: 2 boxes per row on small phones */
+    .stats-overview {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+    }
+    .stats-overview .stat-item:last-child {
+        grid-column: auto !important;
+        max-width: 100% !important;
+        justify-self: stretch !important;
+    }
+    .stat-item {
+        padding: 7px 8px !important;
+    }
+    .stat-title {
+        font-size: 0.68rem !important;
+    }
+    .stat-change {
+        font-size: 0.62rem !important;
+    }
+    .stat-content .stat-number {
+        font-size: 1rem !important;
+    }
+
+    /* Calendar Stats: 2 boxes per row on small phones */
+    .cal-stats-overview {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+    }
+    .cal-stats-overview .cal-stat-item {
+        padding: 7px 8px !important;
+    }
+    .cal-stat-title {
+        font-size: 0.68rem !important;
+    }
+    .cal-stat-change {
+        font-size: 0.62rem !important;
+    }
+    .cal-stat-number {
+        font-size: 1rem !important;
+    }
+    #rentalDurationDisplay {
+        font-size: 0.95rem !important;
+        gap: 2px 4px !important;
+    }
+
+    /* Categories page — mobile: 2 columns, compact cards */
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        padding: 12px !important;
+        margin-top: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+
+    /* Categories page - ensure button is at top with no margin */
+    .categories-page .search-filter-section-top {
+        position: relative !important;
+        top: 0 !important;
+        margin-top: 50 px !important;
+        padding: 8px 10px !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+    .categories-page .search-filter-section-top .add-new-product-btn {
+        margin-top: 0 !important;
+        margin-bottom: 8px !important;
+    }
+    .categories-page .search-filter-section-top .form-group {
+        margin-top: 0 !important;
+        border: none !important;
+    }
+    .categories-page .search-filter-section-top .search-filter-row {
+        margin-top: 0 !important;
+        border: none !important;
+    }
+
+    /* Categories page main content adjustment */
+    .categories-page.main-content {
+        padding: 0 16px 20px 16px !important;
+    }
+    .categories-page.main-content .search-filter-section-top {
+        padding-top: 8px !important;
+    }
+
+    /* Buy page - mobile adjustments */
+    .buy-page .osa-top-bar {
+        margin-top: 50px !important;
+        padding: 8px 10px !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+    .buy-page .osa-search-wrapper {
+        border: none !important;
+    }
+    .buy-page .cal-stats-overview {
+        margin-top: 10px !important;
+    }
+    .buy-page .cal-stat-item {
+        min-height: 70px !important;
+    }
+
+    /* Buy page table - mobile responsive */
+    .buy-page .osa-table-card {
+        border-radius: 8px !important;
+        overflow: hidden !important;
+    }
+
+    .buy-page .osa-table-responsive {
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+
+    .buy-page .osa-logs-table {
+        width: 100% !important;
+        font-size: 0.75rem !important;
+        table-layout: fixed !important;
+    }
+
+    .buy-page .osa-logs-table th {
+        padding: 8px 6px !important;
+        font-size: 0.7rem !important;
+        white-space: nowrap !important;
+    }
+
+    .buy-page .osa-logs-table td {
+        padding: 8px 6px !important;
+        font-size: 0.72rem !important;
+    }
+
+    /* Hide non-essential columns on mobile */
+    .buy-page .osa-logs-table .col-customer,
+    .buy-page .osa-logs-table .col-order-code,
+    .buy-page .osa-logs-table .col-date,
+    .buy-page .osa-logs-table .col-qty-price,
+    .buy-page .osa-logs-table .col-payment,
+    .buy-page .osa-logs-table .col-status {
+        display: none !important;
+    }
+
+    /* Show only Product Details and Action columns */
+    .buy-page .osa-logs-table .col-prod-details {
+        display: table-cell !important;
+        width: 70% !important;
+    }
+
+    .buy-page .osa-logs-table .col-action {
+        display: table-cell !important;
+        width: 30% !important;
+        text-align: right !important;
+    }
+
+    .buy-page .buy-order-row {
+        display: table-row !important;
+    }
+
+    .buy-page .buy-order-row[style*="display: none"] {
+        display: none !important;
+    }
+
+    .buy-page .product-mini-cell {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+
+    .buy-page .product-mini-thumb {
+        width: 35px !important;
+        height: 35px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .buy-page .product-cell-name {
+        font-size: 0.75rem !important;
+        max-width: none !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        flex: 1 !important;
+    }
+
+    .buy-page .product-cell-cat {
+        display: none !important;
+    }
+
+    .buy-page .customer-cell-name {
+        font-size: 0.72rem !important;
+        max-width: 100px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+
+    .buy-page .code-pill {
+        font-size: 0.65rem !important;
+        padding: 2px 6px !important;
+    }
+
+    .buy-page .date-cell {
+        font-size: 0.7rem !important;
+    }
+
+    .buy-page .btn-action-view {
+        padding: 6px 10px !important;
+        font-size: 0.7rem !important;
+        white-space: nowrap !important;
+    }
+    .categories-grid.slide-panel-open {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .category-card {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        min-height: 120px !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+    }
+    .category-image-container {
+        height: 100px !important;
+    }
+    .category-placeholder {
+        font-size: 1.8rem !important;
+    }
+    .category-info {
+        padding: 8px !important;
+    }
+    .category-info h3 {
+        font-size: 0.78rem !important;
+        margin-bottom: 5px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    .category-actions {
+        padding: 0 8px 8px 8px !important;
+        gap: 5px !important;
+    }
+    .btn-edit, .btn-delete {
+        padding: 5px 6px !important;
+        font-size: 0.72rem !important;
+        border-radius: 5px !important;
+    }
+
+    /* Products: 1-col */
+    .gowns-grid, .products-grid { grid-template-columns: 1fr !important; }
+
+    /* Slide panel: full screen */
+    .slide-panel {
+        width: 100% !important;
+        right: -120% !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border-left: none !important;
+    }
+    .slide-panel.slide-panel-open {
+        right: 0 !important;
+        box-shadow: -10px 0 35px rgba(0, 0, 0, 0.75), -2px 0 15px rgba(201, 170, 46, 0.2) !important;
+        border-left: 2px solid rgba(201, 170, 46, 0.6) !important;
+    }
+
+    /* Image slots: 2-col */
+    .new-product-image-slots { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+    .size-inputs { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Modals: full screen */
+    .modal-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 0 !important;
+        max-height: 100vh !important;
+    }
+
+    /* Typography */
+    h1 { font-size: 1.4rem !important; }
+    h2 { font-size: 1.2rem !important; }
+
+    /* Smaller hamburger */
+    #mobileMenuToggle { top: 10px; left: 10px; width: 38px; height: 38px; }
+
+    /* Forms */
+    .admin-form-row, .form-row { gap: 10px !important; }
+
+    /* Metrics: 1-col */
+    .cust-metrics-grid { grid-template-columns: 1fr !important; }
+    .status-breakdown { grid-template-columns: 1fr !important; }
+
+    /* Calendar */
+    .calendar-day { min-height: 48px !important; }
+    .calendar-event { font-size: 9px !important; }
+
+    /* Card panels */
+    .admin-card-panel { padding: 16px !important; }
+}
+
+/* ══════════════════════════════════════════════
+   GOWNS.PHP — SPECIFIC MOBILE FIXES
+   (applies on top of the general rules above)
+══════════════════════════════════════════════ */
+
+/* ─── Tablet (≤ 1024px): category-row 4 columns ─── */
+@media (max-width: 1024px) {
+    .category-row {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 12px !important;
+    }
+    .slide-panel-open .category-row {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    /* Search filter bar: give it more room */
+    .search-filter-section-top {
+        padding: 8px 20px !important;
+        right: 8px !important;
+    }
+}
+
+/* ─── Mobile (≤ 768px) ─── */
+@media (max-width: 768px) {
+
+    /* ── Fixed top search/filter bar: stack below hamburger ── */
+    .search-filter-section-top {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        padding: 10px 14px !important;
+        margin-top: 62px !important; /* clear hamburger */
+        background: transparent !important;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
+        z-index: 90 !important;
+        gap: 8px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* ── Gowns page specific: additional top margin for search filter section on mobile ── */
+    body.gowns-page .search-filter-section-top {
+        margin-top: 45px !important;
+    }
+
+    .search-filter-section-top .search-filter-row {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+        width: 100% !important;
+    }
+
+    .search-filter-section-top .form-group {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    /* Each element takes its own row */
+    .search-filter-section-top .search-filter-row > .form-group:nth-child(1),
+    .search-filter-section-top .form-group-search {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .search-filter-section-top .search-filter-row > .form-group:nth-child(2),
+    .search-filter-section-top .form-group-category {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .search-filter-section-top .search-filter-row > .form-group:nth-child(3),
+    .search-filter-section-top .form-group-add {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .search-filter-section-top input,
+    .search-filter-section-top select {
+        width: 100% !important;
+        height: 40px !important;
+        box-sizing: border-box !important;
+        font-size: 13px !important;
+    }
+
+    /* Search input styling to match buy.php */
+    .search-filter-section-top input[type="text"] {
+        border: 1px solid #7c6300 !important;
+        border-radius: 8px !important;
+        background: #000000 !important;
+        color: #ffffff !important;
+        box-shadow: inset 0 0 8px rgba(212, 175, 55, 0.4) !important;
+        transition: all 0.3s ease !important;
+        outline: none !important;
+    }
+
+    .search-filter-section-top input[type="text"]:hover,
+    .search-filter-section-top input[type="text"]:focus {
+        background: #1a1a1a !important;
+        border-color: #d4af37 !important;
+        box-shadow: inset 0 0 12px rgba(212, 175, 55, 0.6) !important;
+        color: #ffffff !important;
+    }
+
+    .search-filter-section-top input[type="text"]::placeholder {
+        color: #888888 !important;
+    }
+
+    /* "Add New Product" button: matches Category height, one row */
+    .add-new-product-btn {
+        width: 100% !important;
+        height: 40px !important;
+        padding: 0 8px !important;
+        font-size: 13px !important;
+        text-align: center !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
+        box-sizing: border-box !important;
+        margin-top: 0 !important;
+        margin-bottom: 8px !important;
+    }
+
+    /* When slide panel is open, keep filter in flow */
+    body.slide-panel-open .search-filter-section-top {
+        right: auto !important;
+        width: 100% !important;
+    }
+
+    /* ── Main shell: account for static filter bar ── */
+    .shell {
+        padding-top: 16px !important; /* filter bar is now in flow */
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+
+    /* ── Content section & gowns-grid: remove desktop negative margin so left and right margins match ── */
+    .content-section {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .gowns-grid {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 0 8px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* ── Category row: 3 box cards per row on mobile ── */
+    .category-row {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .slide-panel-open .category-row {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    /* ── Gown card: box card layout ── */
+    .gown-card {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: unset !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+    }
+
+    .gown-card img,
+    .model-viewer,
+    .gown-card .model-viewer {
+        width: 100% !important;
+        min-width: unset !important;
+        height: 105px !important;
+        min-height: 105px !important;
+        border-radius: 8px 8px 0 0 !important;
+        object-fit: cover !important;
+    }
+
+    .gown-card-content {
+        padding: 6px 5px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+    }
+
+    .gown-card h3 {
+        font-size: 0.72rem !important;
+        line-height: 1.25 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin: 0 !important;
+    }
+
+    .gown-card p,
+    .gown-category {
+        font-size: 0.62rem !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin: 0 !important;
+    }
+
+    .gown-card .price {
+        font-size: 0.72rem !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+    }
+
+    .gown-card .price span {
+        font-size: 0.65rem !important;
+    }
+
+    .gown-stock {
+        margin-top: 1px !important;
+    }
+
+    .gown-stock span {
+        font-size: 0.62rem !important;
+        white-space: nowrap !important;
+    }
+
+    .card-3d-badge {
+        top: 4px !important;
+        right: 4px !important;
+        font-size: 8px !important;
+        padding: 1px 4px !important;
+    }
+
+    .discount-badge {
+        top: 4px !important;
+        right: 4px !important;
+        font-size: 0.60rem !important;
+        padding: 1px 4px !important;
+    }
+
+    /* ── Category header ── */
+    .category-header {
+        margin: 18px 0 10px 0 !important;
+    }
+
+    .category-title {
+        font-size: 1.1rem !important;
+    }
+
+    /* ── Gowns grid container ── */
+    .gowns-grid {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* ── Add/Edit slide panels: full width ── */
+    #addNewProductModal,
+    #editModal {
+        width: 100% !important;
+        right: -100% !important;
+        border-radius: 0 !important;
+        z-index: 99999 !important;
+        margin-bottom: 20px !important;
+    }
+
+    #addNewProductModal.slide-panel-open,
+    #editModal.slide-panel-open {
+        right: 0 !important;
+        z-index: 99999 !important;
+    }
+
+    #addNewProductModal .slide-panel-header,
+    #editModal .slide-panel-header {
+        position: relative !important;
+        z-index: 100000 !important;
+    }
+
+    #addNewProductModal .slide-panel-body,
+    #editModal .slide-panel-body {
+        padding: 16px 16px 20px 16px !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* ── Hide mobile menu / sidebar / top page title when slide panel is open ── */
+    body.slide-panel-open #mobileMenuToggle,
+    body.slide-panel-open #mobilePageTitle,
+    body.slide-panel-open .sidebar,
+    body.slide-panel-open #sidebarOverlay {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* Slide panel body scrollable */
+    .slide-panel-body {
+        padding: 16px !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* ── Edit modal grid: stack columns ── */
+    .edit-modal-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    /* ── Edit model preview: smaller on mobile ── */
+    #editModelPreview {
+        height: 150px !important;
+    }
+
+    /* ── New product image slots: 2-col ── */
+    .new-product-image-slots {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    /* ── Edit Product image slots: 2 boxes per row on mobile ── */
+    #editModal .edit-product-image-slots {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        flex-direction: unset !important;
+        width: 100% !important;
+    }
+
+    #editModal .edit-image-slot-row {
+        height: 115px !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: relative !important;
+        margin: 0 !important;
+        border-radius: 8px !important;
+    }
+
+    #editModal .edit-image-slot-row .edit-slot-placeholder {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 6px 4px !important;
+        gap: 4px !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    #editModal .edit-image-slot-row .slot-icon-badge {
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px !important;
+        border-radius: 6px !important;
+    }
+
+    #editModal .edit-image-slot-row .slot-icon-badge i {
+        font-size: 14px !important;
+    }
+
+    #editModal .edit-image-slot-row .slot-text-col {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 2px !important;
+        width: 100% !important;
+    }
+
+    #editModal .edit-image-slot-row .slot-title {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+    }
+
+    #editModal .edit-image-slot-row .slot-subtitle {
+        font-size: 9px !important;
+        text-align: center !important;
+        line-height: 1.1 !important;
+    }
+
+    #editModal .edit-image-slot-row .slot-action-icon {
+        display: none !important;
+    }
+
+    #editModal .edit-image-slot-row .slot-full-img {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        border-radius: 8px !important;
+    }
+
+    #editModal .edit-image-slot-row .slot-floating-badge {
+        font-size: 9px !important;
+        padding: 2px 5px !important;
+        top: 4px !important;
+        left: 4px !important;
+        border-radius: 4px !important;
+        z-index: 5 !important;
+    }
+
+    #editModal .edit-image-slot-row .slot-remove-btn {
+        top: 4px !important;
+        right: 4px !important;
+        width: 22px !important;
+        height: 22px !important;
+        font-size: 14px !important;
+        line-height: 1 !important;
+        z-index: 5 !important;
+    }
+
+    /* ── Edit Product buttons: Update & Delete side-by-side on ONE row on mobile ── */
+    #editModal .form-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 8px !important;
+        width: 100% !important;
+        margin-top: 16px !important;
+        margin-bottom: 20px !important;
+        padding-bottom: 10px !important;
+    }
+
+    #editModal .form-actions .btn-submit,
+    #editModal .form-actions .btn-delete {
+        flex: 1 1 50% !important;
+        width: 50% !important;
+        min-width: 0 !important;
+        padding: 11px 4px !important;
+        font-size: 12.5px !important;
+        font-weight: 700 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+
+    /* ── Form rows in panels: stack ── */
+    .slide-panel-body .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    /* ── Range inputs: stack on small screens ── */
+    .range-inputs {
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+    }
+
+    .range-inputs input {
+        flex: 1 !important;
+        min-width: 80px !important;
+    }
+
+    /* ── Submit button: full width ── */
+    .btn-submit {
+        width: 100% !important;
+        padding: 12px !important;
+    }
+
+    /* ── Add New Product modal form actions: add bottom margin ── */
+    #addNewProductModal .form-actions {
+        margin-bottom: 20px !important;
+        padding-bottom: 10px !important;
+    }
+
+    /* ── Toast notification: reposition on mobile ── */
+    .custom-slide-toast {
+        right: -100% !important;
+        left: 10px !important;
+        min-width: 0 !important;
+        max-width: calc(100vw - 20px) !important;
+        box-sizing: border-box !important;
+        top: 10px !important;
+    }
+
+    .custom-slide-toast.show {
+        right: 10px !important;
+        left: 10px !important;
+    }
+
+    /* ── Prevent filter bar hiding when modal-open ── */
+    body.modal-open .search-filter-section-top {
+        display: flex !important;
+    }
+}
+
+/* ─── Small phones (≤ 480px) ─── */
+@media (max-width: 480px) {
+
+    .shell {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .content-section,
+    .gowns-grid {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Category row: 3 box cards per row on small phones */
+    .category-row {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 5px !important;
+    }
+
+    /* Gown card: box card layout on small phones */
+    .gown-card {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: unset !important;
+        border-radius: 7px !important;
+        align-items: stretch !important;
+        overflow: hidden !important;
+    }
+
+    .gown-card img,
+    .gown-card .model-viewer,
+    .model-viewer {
+        width: 100% !important;
+        min-width: unset !important;
+        height: 90px !important;
+        min-height: 90px !important;
+        border-radius: 7px 7px 0 0 !important;
+        object-fit: cover !important;
+    }
+
+    /* Placeholder div for no-image gowns */
+    .gown-card > div.model-viewer {
+        width: 100% !important;
+        min-width: unset !important;
+        height: 90px !important;
+        border-radius: 7px 7px 0 0 !important;
+    }
+
+    .gown-card-content {
+        flex: 1 !important;
+        padding: 4px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1px !important;
+        justify-content: flex-start !important;
+    }
+
+    .gown-card h3 {
+        font-size: 0.68rem !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin: 0 !important;
+    }
+
+    .gown-card p,
+    .gown-category {
+        font-size: 0.58rem !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin: 0 !important;
+    }
+
+    .gown-card .price {
+        font-size: 0.68rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .gown-card .price span {
+        font-size: 0.60rem !important;
+    }
+
+    .gown-stock span {
+        font-size: 0.58rem !important;
+    }
+
+    /* Discount badge */
+    .discount-badge {
+        top: 3px !important;
+        right: 3px !important;
+        font-size: 0.55rem !important;
+        padding: 1px 3px !important;
+    }
+
+    /* Image slots: 2 box per row */
+    .new-product-image-slots {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    /* Edit Product: 2 boxes per row & 1 row for buttons on small phones */
+    #editModal .edit-product-image-slots {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+    }
+    #editModal .edit-image-slot-row {
+        height: 105px !important;
+    }
+    #editModal .form-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 6px !important;
+        margin-bottom: 20px !important;
+        padding-bottom: 10px !important;
+    }
+    #editModal .form-actions .btn-submit,
+    #editModal .form-actions .btn-delete {
+        font-size: 11.5px !important;
+        padding: 10px 2px !important;
+    }
+
+    /* Category title smaller */
+    .category-title { font-size: 0.95rem !important; }
+
+    /* Search filter bar: tighter */
+    .search-filter-section-top {
+        padding: 8px 10px !important;
+        margin-top: 0 !important;
+        border-bottom: none !important;
+    }
+    .search-filter-section-top select,
+    .search-filter-section-top input {
+        font-size: 12px !important;
+    }
+    .add-new-product-btn {
+        font-size: 11.5px !important;
+        padding: 0 4px !important;
+    }
+
+    /* Categories page — small phones: 2 compact columns */
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+        padding: 8px !important;
+    }
+    .category-image-container {
+        height: 80px !important;
+    }
+    .category-placeholder {
+        font-size: 1.4rem !important;
+    }
+    .category-info {
+        padding: 6px 8px !important;
+    }
+    .category-info h3 {
+        font-size: 0.7rem !important;
+        margin-bottom: 4px !important;
+    }
+    .category-actions {
+        padding: 0 6px 6px 6px !important;
+        gap: 4px !important;
+    }
+    .btn-edit, .btn-delete {
+        padding: 4px 5px !important;
+        font-size: 0.68rem !important;
+    }
+
+    /* Categories page specific - button at top with margin */
+    .categories-page .search-filter-section-top {
+        margin-top: 50px !important;
+        padding-top: 8px !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+    .categories-page .search-filter-section-top .form-group {
+        border: none !important;
+    }
+    .categories-page .search-filter-section-top .search-filter-row {
+        border: none !important;
+    }
+
+    /* Buy page specific - small phones */
+    .buy-page .osa-top-bar {
+        margin-top: 50px !important;
+        padding-top: 8px !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+    .buy-page .osa-search-wrapper {
+        border: none !important;
+    }
+    .buy-page .cal-stat-item {
+        min-height: 70px !important;
+    }
+    .categories-page .search-filter-section-top .add-new-product-btn {
+        margin-top: 0 !important;
+        margin-bottom: 8px !important;
+    }
+}
